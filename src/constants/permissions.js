@@ -49,3 +49,14 @@ export const hasPermission = (role, required) => {
     granted.includes(`${required}:any`)
   );
 };
+
+hasPermission ("user","cart:manage:own")
+[ROLES.USER]== "user"
+PERMISSIONS.user=  [
+    'user:read:own', 'user:manage:own',
+    'product:read',
+    'cart:manage:own', 'wishlist:manage:own',
+    'order:create', 'order:read:own',
+    'return:create:own',
+  ]
+module.exports = {PERMISSIONS,hasPermission}
