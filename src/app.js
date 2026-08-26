@@ -1,42 +1,39 @@
-const express = require('express');
-const helmet = require('helmet');
-const cors = require('cors');
+const express = require("express");
+const helmet = require("helmet");
+const apiResponse = require("./utils/apiResponse")
+const AuthRouter = require("./modules/auth/auth.routes");
+const UserRouter = require("./modules/user/user.routes");
+require("dotenv").config();
 const cookieParser = require('cookie-parser');
-const mongoSanitize = require('express-mongo-sanitize');
-const compression = require('compression');
-const morgan = require('morgan');
-const rateLimit = require('express-rate-limit');
+const notFound = require("./middlewares/notFound.middleware");
+const errorHandler = require("./middlewares/errorHandler.middleware");
+const asyncHandler = require("./utils/asyncHandler");
 
 const app = express();
-const origin = 'http://localhost:3000';
-app.use(helmet());
-app.use(cors({ origin, credentials: true }));
+
 app.use(express.json());
 app.use(cookieParser());
-app.use(mongoSanitize());
-app.use(compression());
-app.use(morgan('dev'));
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100, 
-  message: 'Too many requests from this IP, please try again later.'
-});
-app.use('/api', limiter); 
-app.use((req, res, next) => {
-  const error = new Error(`Not Found - ${req.originalUrl}`);
-  res.status(404);
-  next(error); 
-});
 
-app.use((err, req, res, next) => {
-  const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
-  
-  res.status(statusCode).json({
-    success: false,
-    message: err.message,
-    stack: process.env.NODE_ENV === 'production' ? null : err.stack,
-  });
-});
+// All routes 
+app.use("/api/v1/auth", AuthRouter);
+app.use("/api/v1/user", UserRouter);
+
+
+
+
+
+
+app.get('/api/v1/health', (req, res) =>
+    res.status(200).json(apiResponse(200, {
+        service: 'ecom-backend', env: process.env.NODE_ENV,
+        uptimeSeconds: Math.round(process.uptime()), timestamp: new Date().toISOString(),
+    }, 'API	is	running')));
+
+app.get('/api/v1/boom', asyncHandler(async () => {
+    throw apiError(418, 'This	error	was	thrown	on	purpose	to	test	errorHandler');
+}));
+
+app.use(notFound);
+app.use(errorHandler);
 
 module.exports = app;
-

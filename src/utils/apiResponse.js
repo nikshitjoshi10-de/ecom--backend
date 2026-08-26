@@ -1,24 +1,8 @@
-
-
-export const apiResponse = (
-  statusCode,
-  data = null,
-  message = "Success"
-) => ({
-  success: statusCode < 400,
-  statusCode,
-  message,
-  data,
+const apiResponse =(statusCode,data=null,message="")=>({
+    success:statusCode<400,
+    statusCode,
+    data,
+    message
 });
 
-
-export const sendSuccess = (
-  res,
-  statusCode,
-  data = null,
-  message = "Success"
-) => {
-  return res.status(statusCode).json(
-    apiResponse(statusCode, data, message)
-  );
-};
+module.exports = apiResponse;
