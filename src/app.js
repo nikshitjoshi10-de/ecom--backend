@@ -3,6 +3,7 @@ const helmet = require("helmet");
 const apiResponse = require("./utils/apiResponse")
 const AuthRouter = require("./modules/auth/auth.routes");
 const UserRouter = require("./modules/user/user.routes");
+const CategoryRouter= require("./modules/category/category.routes")
 require("dotenv").config();
 const cookieParser = require('cookie-parser');
 const notFound = require("./middlewares/notFound.middleware");
@@ -17,6 +18,7 @@ app.use(cookieParser());
 // All routes 
 app.use("/api/v1/auth", AuthRouter);
 app.use("/api/v1/user", UserRouter);
+app.use("/api/v1/categories", CategoryRouter);
 
 
 

@@ -7,11 +7,5 @@ cloudinary.config({
 });
 
 
- const isCloudinaryConfigured = () =>
-  Boolean(
-    process.env.CLOUDINARY_CLOUD_NAME &&
-      process.env.CLOUDINARY_API_KEY &&
-      process.env.CLOUDINARY_API_SECRET,
-  );
-
-module.exports={cloudinary,isCloudinaryConfigured}
+ 
+module.exports={cloudinary}

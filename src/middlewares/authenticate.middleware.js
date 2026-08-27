@@ -25,6 +25,7 @@ const validattionMiddleware = asyncHandler(async(req,res,next)=>{
     req.user= userData;
 
     next();
+    
 });
 
 module.exports=validattionMiddleware;

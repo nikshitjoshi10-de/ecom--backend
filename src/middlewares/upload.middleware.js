@@ -1,7 +1,7 @@
 const apiError = require("../utils/apiError");
 const multer = require("multer")
 
-const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
+const IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp','image/jpg'];
 const VIDEO_TYPES = ['video/mp4'];
 
 /**
@@ -13,6 +13,8 @@ const VIDEO_TYPES = ['video/mp4'];
  * just long enough to stream it to Cloudinary.
  */
 const fileFilter = (_req, file, cb) => {
+
+  console.log("line 17 filter file",file);
   if ([...IMAGE_TYPES, ...VIDEO_TYPES].includes(file.mimetype)) return cb(null, true);
   cb(apiError(400, 'Only jpeg, png, webp or mp4 files are allowed'));
 };
@@ -30,7 +32,7 @@ const fileFilter = (_req, file, cb) => {
   });
 
 // Categories, brands, banners, return photos: one small image.
- const upload = createUploader({ maxSizeMb: 2 });
+ const upload = createUploader({ maxSizeMb: 5 });
 
 // Products: up to five images plus a short clip, so a bigger ceiling.
  const uploadMedia = createUploader({ maxSizeMb: 10 });

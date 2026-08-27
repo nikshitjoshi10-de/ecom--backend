@@ -3,11 +3,7 @@ const {cloudinary,isCloudinaryConfigured} = require("../config/cloudinary");
 
  const uploadToCloudinary = (buffer, folder, resourceType = 'image') =>
   new Promise((resolve, reject) => {
-    if (!isCloudinaryConfigured()) {
-      return reject(
-        apiError(500, 'Image hosting is not configured. Add the CLOUDINARY_* values to your .env'),
-      );
-    }
+    
 
     const stream = cloudinary.uploader.upload_stream(
       { folder, resource_type: resourceType },

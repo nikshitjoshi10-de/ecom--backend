@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { hashPassword } = require("../utils/password");
+const { ROLE_LIST } = require("../constants/roles");
 
 const addressSchema = new mongoose.Schema({
         label: {
@@ -7,12 +8,7 @@ const addressSchema = new mongoose.Schema({
             maxLength: 120,
             trim: true
         },
-        fullName: {
-            type: String,
-            maxLength: 120,
-            trim: true
-        },
-        phone:  {
+        street: {
             type: String,
             maxLength: 120,
             trim: true
@@ -61,7 +57,7 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ["user", "seller", "admin"],
+        enum: ROLE_LIST,
         default: "user",
         index: true
     },
