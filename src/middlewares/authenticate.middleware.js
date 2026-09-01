@@ -12,19 +12,20 @@ const validattionMiddleware = asyncHandler(async(req,res,next)=>{
         res.status(UNAUTHORIZED).json(apiError(UNAUTHORIZED,"Token not found Please login again"))
     };
 
-
+    console.log("accessToken",accessToken)
 
     const decode = verifyAccessToken(accessToken);
-   
+   console.log("middleware decode 17 line", decode)
    const userData =await getUserDataById({_id:decode.sub});
     // const userData = await UserModel.findById({_id:decode.sub});
-      
+        console.log("useData",userData)
     if(!userData){
         res.status(NOT_FOUND).json(apiError(NOT_FOUND,"user not found"))
     };
     req.user= userData;
 
     next();
+    
 });
 
 module.exports=validattionMiddleware;

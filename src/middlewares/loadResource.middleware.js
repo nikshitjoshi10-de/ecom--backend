@@ -1,7 +1,7 @@
 const apiError = require("../utils/apiError");
 const asyncHandler = require("../utils/asyncHandler");
 
-const loadResource = (Model, param = 'id', field = '_id') =>
+ const loadResource = (Model, param = 'id', field = '_id') =>
   asyncHandler(async (req, _res, next) => {
     const value = req.params[param];
 
@@ -16,4 +16,4 @@ const loadResource = (Model, param = 'id', field = '_id') =>
     next();
   });
 
-module.exports = loadResource;
+  module.exports= loadResource;

@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const signAccessToken = (user) =>
     jwt.sign({ sub: String(user._id), role: user.role }, process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: process.env.ACCESS_TOKEN_EXPIRY || '1d' });
+        { expiresIn: process.env.ACCESS_TOKEN_EXPIRY || '40s' });
 
 const signRefreshToken = (user) =>
     jwt.sign({ sub: String(user._id), role: user.role }, process.env.REFRESH_TOKEN_SECRET,

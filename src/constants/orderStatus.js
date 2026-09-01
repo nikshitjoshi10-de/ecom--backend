@@ -1,6 +1,3 @@
-// Per ITEM, because a single order can hold products from several sellers and
-// each seller ships on their own schedule.
- const ITEM_STATUS = ['placed', 'confirmed', 'shipped', 'delivered', 'cancelled', 'returned'];
 
 // Per ORDER: derived from the items, never set by hand.
  const ORDER_STATUS = ['pending_payment', 'confirmed', 'completed', 'cancelled'];

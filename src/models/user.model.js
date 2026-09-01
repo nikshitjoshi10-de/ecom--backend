@@ -63,7 +63,7 @@ const userSchema = new mongoose.Schema({
     },
     isActive: {
         type: String,
-        default: true
+        default: false
     },
     profilePhoto: {
         url: {

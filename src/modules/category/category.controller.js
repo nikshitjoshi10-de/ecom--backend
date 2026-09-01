@@ -19,42 +19,28 @@ const getAllCategoriesController = asyncHandler(async (req, res) => {
 
 
 const createCategoryController = asyncHandler(async (req, res) => {
-    console.log("incoming body:", req.body);
     const data = req.body;
     const file = req.file;
 
-    const result = await CategoryService.createCategoryService(data, file);
+    const result = await CategoryService.createCategoryService(data,file);
 
-    res.status(CREATED).json(apiResponse(CREATED, result, "category successfully created"))
+    res.status(CREATED).json(apiResponse(CREATED,result,"category successfully created"))
 
 })
 
-// update categories 
-// 
+// get all categories 
 const updateCategoryController = asyncHandler(async (req, res) => {
-    const categoryResource = req.resource;
-    const patchData = req.body;
-    const fileData = req.file;
-    console.log(categoryResource, patchData, fileData)
-    const result = await CategoryService.updateCategoryService(categoryResource, patchData, fileData);
 
-    res.status(OK).json(apiResponse(OK, result, "update category successfully"))
 })
 
 // get all categories 
 const deleteCategoryController = asyncHandler(async (req, res) => {
 
-    const result = await CategoryService.deleteCategoryService(req.resource);
-
-    res.status(OK).json(apiResponse(OK, result, "category deleted successfully"))
 })
 
 // get all categories 
 const getCateoriesTreeController = asyncHandler(async (req, res) => {
-const categoriesTree= await CategoryService.categoryTreeService();
 
-
-res.status(OK).json(apiResponse(OK,categoriesTree,"category tree data fetched successfully"))
 });
 
 module.exports = { getCateoriesTreeController, getAllCategoriesController, createCategoryController, updateCategoryController, deleteCategoryController }
