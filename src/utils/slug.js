@@ -7,7 +7,9 @@ function convertToSlug(text) {
     .replace(/^-+|-+$/g, ''); // Remove leading and trailing hyphens
 }
 
-
+function nanoId (){
+  return Math.random().toString(36).substring(2, 8);
+}
 //   Samsaung galaxy s23 (256gb)
 //   samsung-galaxy-s23-256gb
-module.exports = convertToSlug;
+module.exports = {convertToSlug,nanoId};

@@ -9,6 +9,7 @@ const cookieParser = require('cookie-parser');
 const notFound = require("./middlewares/notFound.middleware");
 const errorHandler = require("./middlewares/errorHandler.middleware");
 const asyncHandler = require("./utils/asyncHandler");
+const BrandRouter = require("./modules/brand/brand.routes");
 
 const app = express();
 
@@ -19,6 +20,8 @@ app.use(cookieParser());
 app.use("/api/v1/auth", AuthRouter);
 app.use("/api/v1/user", UserRouter);
 app.use("/api/v1/categories", CategoryRouter);
+app.use("/api/v1/brands", BrandRouter);
+app.use("/api/v1/products", ProductRouter);
 
 
 
@@ -34,6 +37,7 @@ app.get('/api/v1/health', (req, res) =>
 app.get('/api/v1/boom', asyncHandler(async () => {
     throw apiError(418, 'This	error	was	thrown	on	purpose	to	test	errorHandler');
 }));
+
 
 app.use(notFound);
 app.use(errorHandler);
