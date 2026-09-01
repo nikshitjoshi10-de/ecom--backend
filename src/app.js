@@ -35,7 +35,6 @@ app.get('/api/v1/boom', asyncHandler(async () => {
     throw apiError(418, 'This	error	was	thrown	on	purpose	to	test	errorHandler');
 }));
 
-
 app.use(notFound);
 app.use(errorHandler);
 

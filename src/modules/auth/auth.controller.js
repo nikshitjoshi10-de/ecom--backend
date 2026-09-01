@@ -34,13 +34,13 @@ const registerController = asyncHandler(async (req, res) => {
 // Login Api Controller
 const loginController = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
-   
+    console.log("req body", req.body);
     const result = await AuthService.loginService({ email, password });
 
     const tokens = generateToken(res, result.user);
-    
+    console.log("tokens create", tokens)
     const refreshTokendata = await AuthService.createRefreshService({ userId: result.user._id, token: tokens.refreshToken });
-    
+    console.log("refreshTOkendata", refreshTokendata)
     res.status(200).json(apiResponse(200, { userData: result.user, refreshTokendata }, 'login successfully'))
 
 });

@@ -1,8 +1,6 @@
 const express = require("express");
 const CategoryController = require("./category.controller");
 const { upload } = require("../../middlewares/upload.middleware");
-const loadResource = require("../../middlewares/loadResource.middleware");
-const CategoryModel = require("../../models/category.model");
 const categoryRouter = express.Router();
 
 // get all categories tree
@@ -15,10 +13,10 @@ categoryRouter.get("/",CategoryController.getAllCategoriesController);
 categoryRouter.post("/",upload.single("image"),CategoryController.createCategoryController);
 
 // update Category
-categoryRouter.patch("/:id",loadResource(CategoryModel), upload.single("image"),CategoryController.updateCategoryController);
+categoryRouter.patch("/:id",CategoryController.updateCategoryController);
 
 // delete category
-categoryRouter.delete("/:id",loadResource(CategoryModel),CategoryController.deleteCategoryController);
+categoryRouter.delete("/:id",CategoryController.deleteCategoryController);
 
 
 

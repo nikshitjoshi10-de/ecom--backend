@@ -98,5 +98,3 @@ module.exports = {
     deleteUserController,
     getAllusersController,
 };
-
-
